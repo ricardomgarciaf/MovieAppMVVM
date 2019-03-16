@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/welcome_menu"
+            android:icon="@drawable/ic_person_white_24dp"
+            android:title="@string/welcome_menu"/>
+
+        <item
+            android:id="@+id/movie_menu"
+            android:icon="@drawable/ic_person_white_24dp"
+            android:title="@string/movie_menu"/>
+    </group>
+</menu>

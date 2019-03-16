@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="body_margin">10dp</dimen>
+    <dimen name="dimen_24_sp">24sp</dimen>
+    <dimen name="poster_size">300dp</dimen>
+    <dimen name="nav_header_user_height">200dp</dimen>
+    <dimen name="img_profile_width">100dp</dimen>
+    <dimen name="card_width">120dp</dimen>
+</resources>
