@@ -16,5 +16,6 @@
     <string name="welcome_menu">Welcome</string>
     <string name="extra_menu">Extra menu</string>
     <string name="welcome">Welcome</string>
+    <string name="title_activity_movie_search">Movie Search</string>
 
 </resources>
