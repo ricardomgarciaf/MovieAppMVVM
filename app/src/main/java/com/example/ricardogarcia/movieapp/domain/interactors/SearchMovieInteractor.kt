@@ -3,10 +3,10 @@ package com.example.ricardogarcia.movieapp.domain.interactors
 import com.example.ricardogarcia.movieapp.domain.entities.MovieModel
 import com.example.ricardogarcia.movieapp.model.repositories.MovieRepository
 import com.example.ricardogarcia.movieapp.presentation.entities.MovieViewModel
+import org.koin.core.KoinComponent
+import org.koin.core.inject
 
-class SearchMovieInteractor:SearchMovieUseCases {
-
-    lateinit var movieRepository: MovieRepository
+class SearchMovieInteractor(private val movieRepository: MovieRepository):SearchMovieUseCases {
 
     override suspend fun searchMovieByTitle(title: String): MovieViewModel? {
         val searchMovieByTitle = movieRepository.searchMovieByTitle(title)
@@ -14,6 +14,7 @@ class SearchMovieInteractor:SearchMovieUseCases {
     }
 
     fun MovieModel.toMovieViewModel():MovieViewModel{
-        return MovieViewModel(title, year, genre, plot, poster)
+        val moviePoster=if(poster.equals("N/A")) "" else poster!!
+        return MovieViewModel(title!!, year!!, genre!!, plot!!, moviePoster)
     }
 }

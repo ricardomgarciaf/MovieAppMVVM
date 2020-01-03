@@ -1,22 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout android:layout_height="wrap_content"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"></RelativeLayout>
-<!--
-<?xml version="1.0" encoding="utf-8"?>
 <layout>
 
     <data>
         <import type="android.view.View" />
         <variable
-            name="inputdetails"
-            type="com.example.ricardogarcia.movieapp.model.InputDetails"/>
-        <variable
-            name="presenter"
-            type="com.example.ricardogarcia.movieapp.activities.home.core.HomePresenter"/>
+            name="status"
+            type="com.example.ricardogarcia.movieapp.presentation.entities.ResponseViewModel" />
         <variable
             name="movie"
-            type="com.example.ricardogarcia.movieapp.model.Movie"/>
+            type="com.example.ricardogarcia.movieapp.presentation.entities.MovieViewModel"/>
     </data>
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
@@ -37,7 +29,8 @@
         android:text="@string/app_title"
         android:textSize="@dimen/dimen_24_sp" />
 
-    <android.support.design.widget.TextInputLayout
+
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/title_wrapper"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -48,9 +41,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/title"
-            android:text="@={inputdetails.input}"
             android:inputType="textCapWords" />
-    </android.support.design.widget.TextInputLayout>
+    </com.google.android.material.textfield.TextInputLayout>
+
+
 
     <Button
         android:id="@+id/search_btn"
@@ -59,7 +53,6 @@
         android:layout_below="@+id/title_wrapper"
         android:layout_centerHorizontal="true"
         android:text="@string/search"
-        android:onClick="@{()->presenter.searchMovie(inputdetails.input)}"
         android:textAllCaps="true"/>
 
     <ScrollView
@@ -70,8 +63,9 @@
         android:layout_centerHorizontal="true"
         android:background="@android:color/transparent"
         android:overScrollMode="never"
-        android:layout_marginTop="@dimen/body_margin"
-        android:visibility="@{movie.response==1 ? View.VISIBLE : View.GONE}">
+        android:visibility="gone"
+        successState="@{status}"
+        android:layout_marginTop="@dimen/body_margin">
 
             <LinearLayout
                 android:id="@+id/movie_details_layout"
@@ -84,8 +78,7 @@
                     android:layout_width="@dimen/poster_size"
                     android:layout_height="@dimen/poster_size"
                     android:scaleType="fitCenter"
-                    android:poster="@{movie.poster}"
-                    android:visibility='@{!movie.poster.empty &amp;&amp; !movie.poster.equals("N/A") ? View.VISIBLE : View.GONE}'
+                    poster="@{movie.poster}"
                     android:layout_gravity="center_horizontal"/>
 
                 <TextView
@@ -117,6 +110,17 @@
             </LinearLayout>
     </ScrollView>
 
+<ProgressBar
+    android:id="@+id/spinner"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    style="?android:attr/progressBarStyle"
+    android:visibility="gone"
+    android:layout_centerInParent="true"
+    tools:visibility="visible"
+    loadingState="@{status}"
+    />
+
     <LinearLayout
         android:id="@+id/error_layout"
         android:layout_width="wrap_content"
@@ -124,7 +128,9 @@
         android:layout_below="@+id/search_btn"
         android:layout_centerHorizontal="true"
         android:orientation="vertical"
-        android:visibility="@{movie.response==0 ? View.VISIBLE : View.GONE}">
+        android:visibility="gone"
+        errorState="@{status}"
+        >
 
         <TextView
             android:id="@+id/error"
@@ -134,4 +140,4 @@
     </LinearLayout>
 
 </RelativeLayout>
-</layout>-->
+</layout>
